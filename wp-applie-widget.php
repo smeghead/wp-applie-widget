@@ -75,12 +75,11 @@ function wpaw_show_widget($args) {
     $ranking_type = 'topstories';
   }
 
-  $i = 1;
-
   echo "$before_title$widget_title$after_title$before_widget";
 
   $json_contents = file_get_contents('http://applie.net/ranking/rank_up_app/');
   $contents = json_decode($json_contents);
+  echo '<ul>';
   foreach ($contents->context->ranking as $item) {
     $ret = preg_match("@src='([^']*)'@", $item->image_url, $matches);
     $image_url = $matches[1];
@@ -93,6 +92,8 @@ function wpaw_show_widget($args) {
       </li>
     <?php
   }
+  echo '</ul>';
+  echo $after_widget;
 }
 
 function wpaw_init_widget() {
