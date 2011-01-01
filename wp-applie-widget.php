@@ -108,15 +108,16 @@ function get_ranking_items($ranking_type) {
   return $contents;
 }
 function wpaw_show_widget($args) {
-
   $widget_title = get_option('wpaw_widget_title'); 
   $ranking_type = get_option('wpaw_ranking_type');
 
-  if ($widget_title == '') {
+  if ($widget_title) {
     $widget_title = 'Applie.net Ranking';
+    update_option('wpaw_widget_title', $widget_title);
   }
-  if ($ranking_type == '') {
-    $ranking_type = 'topstories';
+  if ($ranking_type) {
+    $ranking_type = 'rank_up_app_ranking';
+    update_option('wpaw_ranking_type', $ranking_type);
   }
 
   echo $args['before_title'] . $widget_title . $args['after_title'] . $args['before_widget'];
@@ -124,7 +125,7 @@ function wpaw_show_widget($args) {
   $contents = get_ranking_items($ranking_type);
 ?>
   <style>
-    ul.wpaw-widget li { height: 32px; }
+    ul.wpaw-widget li { width: 100%; }
   </style>
  <ul class="wpaw-widget">
 <?php
