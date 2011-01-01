@@ -129,9 +129,10 @@ function wpaw_show_widget($args) {
     ?>
       <li>
         <a href="http://applie.net<?php echo $item->url; ?>" rel="nofollow" target="_blank">
-          <img src="http://applie.net<?php echo $image_url; ?>" width="32" />
+          <img src="http://applie.net<?php echo $image_url; ?>" width="32" align="left" />
           <?php echo $item->name; ?>
         </a>
+        <br clear="all"/>
       </li>
     <?php
   }
