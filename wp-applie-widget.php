@@ -111,11 +111,11 @@ function wpaw_show_widget($args) {
   $widget_title = get_option('wpaw_widget_title'); 
   $ranking_type = get_option('wpaw_ranking_type');
 
-  if ($widget_title) {
+  if (!$widget_title) {
     $widget_title = 'Applie.net Ranking';
     update_option('wpaw_widget_title', $widget_title);
   }
-  if ($ranking_type) {
+  if (!$ranking_type) {
     $ranking_type = 'rank_up_app_ranking';
     update_option('wpaw_ranking_type', $ranking_type);
   }
