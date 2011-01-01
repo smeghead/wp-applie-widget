@@ -32,12 +32,6 @@ function get_ranking_url($ranking_type) {
   throw new Exception('invalid ranking type.');
 }
 
-// Hook for adding admin menus
-function wpaw_add_pages() {
-  add_options_page('WP Applie Widget', 'WP Applie Widget', 'administrator', __FILE__, 'wpaw_options_page');
-}
-add_action('admin_menu', 'wpaw_add_pages');
-
 // wpaw_options_page() displays the page content for the Test Options submenu
 function wpaw_options_page() {
   global $ranking_types;
@@ -55,37 +49,18 @@ function wpaw_options_page() {
     //clear caches.
     update_option('last_got_date', '');
     update_option('last_got_json', '');
-
-    // Put an options updated message on the screen
-    ?><div class="updated"><p><strong><?php _e('Options saved . ', 'mt_trans_domain' ); ?></strong></p></div><?php
   }
-
-  // Now display the options editing screen
-  echo '<div class="wrap">';
-
-  // header
-  echo '<h2>' . __('WP Applie Widget Plugin Options', 'mt_trans_domain') . '</h2>';
 ?>
 
-<form name="form1" method="post" action="">
   <input type="hidden" name="is_submit" value="Y">
-
   <p><?php _e("WP Applie Widget Widget Title", 'mt_trans_domain' ); ?> 
-    <input type="text" name="wpaw_widget_title" value="<?php echo $widget_title; ?>" size="50">
-  </p><hr />
-
+    <input type="text" name="wpaw_widget_title" value="<?php echo $widget_title; ?>" size="40">
+  </p>
   <p><?php _e("WP Applie Widget Category:", 'mt_trans_domain' ); ?> 
     <select name="wpaw_ranking_type">
       <?php print_ranking_typs($ranking_types, $ranking_type); ?>
     </select>
   </p>
-  <hr />
-
-  <p class="submit">
-    <input type="submit" name="Submit" value="<?php _e('Update Options', 'mt_trans_domain' ) ?>" />
-  </p>
-  <hr />
-</form>
 <?php
 }
 function print_ranking_typs($ranking_types, $value) {
@@ -153,7 +128,8 @@ function wpaw_show_widget($args) {
 }
 
 function wpaw_init_widget() {
-  register_sidebar_widget("WP Applie Widget", "wpaw_show_widget");
+  register_sidebar_widget('WP Applie Widget', 'wpaw_show_widget');
+  register_widget_control('WP Applie Widget', 'wpaw_options_page', 250, 200 );
 }
 add_action("plugins_loaded", "wpaw_init_widget");
 
