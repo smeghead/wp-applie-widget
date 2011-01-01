@@ -122,17 +122,27 @@ function wpaw_show_widget($args) {
   echo $args['before_title'] . $widget_title . $args['after_title'] . $args['before_widget'];
 
   $contents = get_ranking_items($ranking_type);
-  echo '<ul>';
+?>
+  <style>
+    ul.wpaw-widget li { height: 32px; }
+  </style>
+ <ul class="wpaw-widget">
+<?php
   foreach ($contents->context->ranking as $item) {
     $ret = preg_match("@src='([^']*)'@", $item->image_url, $matches);
     $image_url = $matches[1];
+    if (function_exists('mb_strimwidth')) { // if mb_strimwidth exists, this will cut too long link string.
+      $link_str = mb_strimwidth($item->name, 0, 50, "...", utf8);
+    } else {
+      $link_str = $item->name;
+    }
     ?>
       <li>
         <a href="http://applie.net<?php echo $item->url; ?>" rel="nofollow" target="_blank">
-          <img src="http://applie.net<?php echo $image_url; ?>" width="32" align="left" />
-          <?php echo $item->name; ?>
+          <img src="http://applie.net<?php echo $image_url; ?>" width="32" height="32" align="left" />
+          <?php echo $link_str; ?>
+          <br clear="all"/>
         </a>
-        <br clear="all"/>
       </li>
     <?php
   }
