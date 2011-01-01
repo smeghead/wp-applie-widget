@@ -126,6 +126,7 @@ function wpaw_show_widget($args) {
 ?>
   <style>
     ul.wpaw-widget li { width: 100%; }
+    ul.wpaw-widget li img { margin-right: 5px; }
   </style>
  <ul class="wpaw-widget">
 <?php
