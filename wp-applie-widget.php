@@ -32,7 +32,6 @@ function get_ranking_url($ranking_type) {
 
 // wpaw_options_page() displays the page content for the Test Options submenu
 function wpaw_options_page() {
-  global $ranking_types;
   // Read in existing option value from database
   $widget_title = get_option('wpaw_widget_title');
   $ranking_type = get_option('wpaw_ranking_type' );
@@ -56,12 +55,13 @@ function wpaw_options_page() {
   </p>
   <p><?php _e("WP Applie Widget Category:", 'mt_trans_domain' ); ?> 
     <select name="wpaw_ranking_type">
-      <?php print_ranking_typs($ranking_types, $ranking_type); ?>
+      <?php print_ranking_typs($ranking_type); ?>
     </select>
   </p>
 <?php
 }
-function print_ranking_typs($ranking_types, $value) {
+function print_ranking_typs($value) {
+  global $ranking_types;
   foreach ($ranking_types as $type) {
     ?><option value="<?php echo $type['name']; ?>" <?php if ($value == $type['name']) { echo 'selected="selected"';} ?>><?php echo _e($type['name'], 'mt_trans_domain'); ?></option><?php
   }
