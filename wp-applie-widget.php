@@ -7,27 +7,25 @@ Version: 0.0.0
 Author: smeghead
  */
 $ranking_types = array(
-  array(name =>  'price_down_app_ranking', url =>  '/ranking/price_down_app/'),
-  array(name =>  'pv_review_ranking', url =>  '/ranking/pv_review/'),
-  array(name =>  'pv_app_ranking', url =>  '/ranking/pv_app/'),
-  array(name =>  'recommend_app_ranking', url =>  '/ranking/recommend_app/'),
-  array(name =>  'rank_up_app_ranking', url =>  '/ranking/rank_up_app/'),
-  array(name =>  'rated_app_ranking', url =>  '/ranking/rated_app/'),
-  array(name =>  'kuchikomi_app_ranking', url =>  '/ranking/kuchikomi_app/'),
-  array(name =>  'version_up_app_ranking', url =>  '/ranking/version_up_app/'),
-  array(name =>  'posted_reviewer_ranking', url =>  '/ranking/posted_reviewer/'),
-  array(name =>  'rated_reviewer_ranking', url =>  '/ranking/rated_reviewer/'),
-  array(name =>  'appstore_charged_app_ranking', url =>  '/ranking/appstore_charged_app/'),
-  array(name =>  'appstore_free_app_ranking', url =>  '/ranking/appstore_free_app/'),
-  array(name =>  'high_price_app_ranking', url =>  '/ranking/high_price_app/'),
-  array(name =>  'low_price_app_ranking', url =>  '/ranking/low_price_app/'));
+  'price_down_app_ranking' => array(url =>  '/ranking/price_down_app/'),
+  'pv_review_ranking' => array(url =>  '/ranking/pv_review/'),
+  'pv_app_ranking' => array(url =>  '/ranking/pv_app/'),
+  'recommend_app_ranking' => array(url =>  '/ranking/recommend_app/'),
+  'rank_up_app_ranking' => array(url =>  '/ranking/rank_up_app/'),
+  'rated_app_ranking' => array(url =>  '/ranking/rated_app/'),
+  'kuchikomi_app_ranking' => array(url =>  '/ranking/kuchikomi_app/'),
+  'version_up_app_ranking' => array(url =>  '/ranking/version_up_app/'),
+  'posted_reviewer_ranking' => array(url =>  '/ranking/posted_reviewer/'),
+  'rated_reviewer_ranking' => array(url =>  '/ranking/rated_reviewer/'),
+  'appstore_charged_app_ranking' => array(url =>  '/ranking/appstore_charged_app/'),
+  'appstore_free_app_ranking' => array(url =>  '/ranking/appstore_free_app/'),
+  'high_price_app_ranking' => array(url =>  '/ranking/high_price_app/'),
+  'low_price_app_ranking' => array(url =>  '/ranking/low_price_app/'));
 
 function get_ranking_url($ranking_type) {
   global $ranking_types;
-  foreach ($ranking_types as $item) {
-    if ($item['name'] == $ranking_type) {
-      return 'http://applie.net/' . $item['url'];
-    }
+  if (array_key_exists($ranking_type, $ranking_types)) {
+    return $ranking_types[$ranking_type]['url'];
   }
   throw new Exception('invalid ranking type.');
 }
@@ -41,7 +39,7 @@ function wpaw_options_page() {
 
   // See if the user has posted us some information
   // If they did, this hidden field will be set to 'Y'
-  if( $_POST['is_submit'] == 'Y' ) {
+  if (isset($_POST['is_submit'])) {
     $widget_title = $_POST['wpaw_widget_title'];
     $ranking_type = $_POST['wpaw_ranking_type'];
     update_option('wpaw_widget_title', $widget_title);
@@ -52,7 +50,7 @@ function wpaw_options_page() {
   }
 ?>
 
-  <input type="hidden" name="is_submit" value="Y">
+  <input type="hidden" name="is_submit" value="true">
   <p><?php _e("WP Applie Widget Widget Title", 'mt_trans_domain' ); ?> 
     <input type="text" name="wpaw_widget_title" value="<?php echo $widget_title; ?>" size="40">
   </p>
