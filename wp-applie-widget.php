@@ -25,7 +25,7 @@ $ranking_types = array(
 function get_ranking_url($ranking_type) {
   global $ranking_types;
   if (array_key_exists($ranking_type, $ranking_types)) {
-    return $ranking_types[$ranking_type]['url'];
+    return 'http://applie.net' . $ranking_types[$ranking_type]['url'];
   }
   throw new Exception('invalid ranking type.');
 }
@@ -62,8 +62,8 @@ function wpaw_options_page() {
 }
 function print_ranking_typs($value) {
   global $ranking_types;
-  foreach ($ranking_types as $type) {
-    ?><option value="<?php echo $type['name']; ?>" <?php if ($value == $type['name']) { echo 'selected="selected"';} ?>><?php echo _e($type['name'], 'mt_trans_domain'); ?></option><?php
+  foreach ($ranking_types as $name => $type) {
+    ?><option value="<?php echo $name; ?>" <?php if ($value == $name) { echo 'selected="selected"';} ?>><?php echo _e($name, 'mt_trans_domain'); ?></option><?php
   }
 } 
 
