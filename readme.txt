@@ -15,8 +15,8 @@ This plugin allows you to display the application ranking of applie.net.
 
 1. Transfer the file `applie-widget.php` to the `/wp-content/plugins/` folder
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Edit the Applie.net Settings, through the Admin Panel --> Settings.
-4. Enable the Widget through the Appearance --> Widgets tab.
+3. Enable the Widget through the Appearance --> Widgets tab.
+3. Edit the WP Applie Widget Settings, through the 'Sidebar'.
 
 == Changelog ==
 
