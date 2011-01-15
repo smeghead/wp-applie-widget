@@ -98,8 +98,9 @@ function wpaw_show_widget($args) {
   $contents = get_ranking_items($ranking_type);
 ?>
   <style>
-    ul.wpaw-widget li { width: 100%; }
+    ul.wpaw-widget li { width: 100%; height: 32px;}
     ul.wpaw-widget li img { margin-right: 5px; }
+    ul.wpaw-widget li.notes { width: 100%; text-align: right; }
   </style>
  <ul class="wpaw-widget">
 <?php
@@ -121,7 +122,12 @@ function wpaw_show_widget($args) {
       </li>
     <?php
   }
-  echo '</ul>';
+  ?>
+    <li class="notes">
+      Powered By <a href="http://applie.net/" target="_blank">applie.net</a>
+    </li>
+  </ul>
+  <?php
   echo $args['after_widget'];
 }
 
